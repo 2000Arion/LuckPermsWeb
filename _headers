@@ -1,8 +1,8 @@
-/css/*
+https://gold-lpbin.mc.a2data.site/css/*
   Cache-Control: public, max-age=31536000, immutable
 
-/img/*
+https://gold-lpbin.mc.a2data.site/img/*
   Cache-Control: public, max-age=31536000, immutable
 
-/js/*
+https://gold-lpbin.mc.a2data.site/js/*
   Cache-Control: public, max-age=31536000, immutable

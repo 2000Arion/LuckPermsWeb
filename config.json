@@ -1,7 +1,7 @@
 {
-  "bytebin_url": "https://usercontent.luckperms.net/",
+  "bytebin_url": "https://bin.a2data.site/",
   "bytesocks_host": "usersockets.luckperms.net",
   "base": "/",
-  "selfHosted": false,
+  "selfHosted": true,
   "api_url": "https://metadata.luckperms.net"
 }

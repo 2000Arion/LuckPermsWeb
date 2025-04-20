@@ -6,3 +6,26 @@ https://gold-lpbin.mc.a2data.site/img/*
 
 https://gold-lpbin.mc.a2data.site/js/*
   Cache-Control: public, max-age=31536000, immutable
+
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https:;
+
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https:;
+
+/*.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https:;
+
+/*.svg
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https:;
+
+/*.ico
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https:;
+
+https://*.pages.dev/*
+  X-Robots-Tag: noindex

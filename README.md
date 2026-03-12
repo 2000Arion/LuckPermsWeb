@@ -44,7 +44,7 @@ To build the project to a folder that can be accessed via a webserver, run this 
 npm run build
 ```
 
-### Self hosting
-There is a convenient installation script provided for self hosting the web apps.
+### Self-hosting
+There is a `docker-compose.yml` file included in this repository which can be used as a starting point.
 
-For more details, see [here](https://github.com/LuckPerms/web-installer).
+For more details, see [here](https://luckperms.net/wiki/Self-hosting-the-web-interfaces).

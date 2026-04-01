@@ -9,3 +9,104 @@ export function contextsToArray(context) {
 
   return [];
 }
+
+export function parseNodeType(key) {
+  // inheritance: group.<group name>
+  if (key.startsWith('group.')) {
+    return {
+      type: 'inheritance',
+      groupName: key.substring(6),
+    };
+  }
+
+  // prefix: prefix.<weight>.<prefix string>
+  if (key.startsWith('prefix.')) {
+    const parts = key.substring(7).match(/^(\d+)\.(.+)$/);
+    if (parts) {
+      return {
+        type: 'prefix',
+        weight: parts[1],
+        prefix: unescapeCharacters(parts[2]),
+      };
+    }
+  }
+
+  // suffix: suffix.<weight>.<suffix string>
+  if (key.startsWith('suffix.')) {
+    const parts = key.substring(7).match(/^(\d+)\.(.+)$/);
+    if (parts) {
+      return {
+        type: 'suffix',
+        weight: parts[1],
+        suffix: unescapeCharacters(parts[2]),
+      };
+    }
+  }
+
+  // meta: meta.<key>.<value>
+  if (key.startsWith('meta.')) {
+    const metaContent = key.substring(5);
+    const parts = splitByNodeSeparatorInTwo(metaContent);
+    if (parts && parts.length === 2) {
+      return {
+        type: 'meta',
+        key: unescapeCharacters(parts[0]),
+        value: unescapeCharacters(parts[1]),
+      };
+    }
+  }
+
+  // weight: weight.<weight value>
+  if (key.startsWith('weight.')) {
+    return {
+      type: 'weight',
+      weight: key.substring(7),
+    };
+  }
+
+  // display name: displayname.<display name>
+  if (key.startsWith('displayname.')) {
+    return {
+      type: 'displayname',
+      displayName: key.substring(12),
+    };
+  }
+
+  // assume permission
+  return {
+    type: 'permission',
+    permission: key,
+  };
+}
+
+export function buildNodeKey(type, parts) {
+  switch (type) {
+    case 'inheritance':
+      return `group.${parts.groupName || ''}`;
+    case 'prefix':
+      return `prefix.${parts.weight || '0'}.${escapeCharacters(parts.prefix || '')}`;
+    case 'suffix':
+      return `suffix.${parts.weight || '0'}.${escapeCharacters(parts.suffix || '')}`;
+    case 'meta':
+      return `meta.${escapeCharacters(parts.key || '')}.${escapeCharacters(parts.value || '')}`;
+    case 'weight':
+      return `weight.${parts.weight || '0'}`;
+    case 'displayname':
+      return `displayname.${parts.displayName || ''}`;
+    case 'permission':
+    default:
+      return parts.permission || '';
+  }
+}
+
+function escapeCharacters(str) {
+  return str.replace(/\./g, '\\.');
+}
+
+function unescapeCharacters(str) {
+  return str.replace(/\\\./g, '.');
+}
+
+function splitByNodeSeparatorInTwo(str) {
+  return str.split(/(?<!\\)\./, 2);
+}
